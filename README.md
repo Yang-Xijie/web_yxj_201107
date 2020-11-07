@@ -1,3 +1,19 @@
+# 说明_yxj
+这是直接从react-app生成的,生成所用的命令如下
+```bash
+yarn create react-app web_yxj_201107 --template typescript # 要求电脑装了yarn
+open web_yxj_201107 -a Visual\ Studio\ Code # 用vscode打开刚刚生成的目录
+# 在`.gitignore` 中添加".vscode/*" "!.vscode/settings.json"
+# git init
+# git add .
+# git commit -m"init" # 这三部可以省略,因为yarn已经帮我们做好了,git log可以查看
+git log # Initialize project using Create React App
+yarn react-scripts start # 在浏览器查看前端并实时显示修改
+```
+
+修改tsconfig一行: "allowJs": false, // default: true -> false
+为了方便我们直接把eesast中前端的package.json 和 yarn.lock copy到当前目录下,yarn install
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
