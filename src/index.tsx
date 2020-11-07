@@ -5,12 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // above - default import
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import { gql } from "@apollo/client";
+// query operation
+// import { get_user } from "./api/types";
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: "http://localhost:23333/v1/graphql", // GraphQL server's URL
   cache: new InMemoryCache(),
 });
+
 client
   .query({
     query: gql`
@@ -25,9 +29,11 @@ client
   .then((result) => console.log(result));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 

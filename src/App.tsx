@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react"; // 这里添加了useState
-import { InputNumber, message, Button, Input } from "antd"; //copied form ant.design
+import React from "react";
+// import React, { useState, useEffect } from "react"; // 这里添加了useState
+// import { InputNumber, message, Button, Input } from "antd"; //copied form ant.design
 
 import "antd/dist/antd.css";
 /* without that css file, the InputNumber will be so ugly */

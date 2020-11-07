@@ -1,6 +1,5 @@
-query MyQuery {
+query get_user {
   user {
     name
-    email
   }
 }
