@@ -77,7 +77,10 @@
     "codegen:watch": "yarn codegen --watch",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "lint": "eslint --ext .ts,.tsx src/",
-    "typecheck": "tsc --noUnusedLocals"
+    "typecheck": "tsc --noUnusedLocals",
+
+    "mystart":"react-scripts start",
+    "mycodegen": "yarn apollo client:codegen --target=typescript --outputFlat src/api/types.ts"
   },
   "husky": {
     "hooks": {

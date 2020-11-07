@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# 前端代码中添加的两行
+.vscode/*
+!.vscode/settings.json
