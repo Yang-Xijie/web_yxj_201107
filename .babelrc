@@ -1,0 +1,18 @@
+// 此文件为转译阶段使用的包:babel(默认react-app里面就带了这个) 的配置文件(就跟zshrc差不多)
+// 其中该包的插件 babel-plugin-import-graphql 用来将在页面最上面import的graph语句变成gql`...`这样的查询语句
+// 供你直接像变量一样import在代码中使用
+{
+  "presets": ["babel-preset-react-app"],
+  "plugins": [
+    [
+      "babel-plugin-import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": true
+      }
+    ],
+    "babel-plugin-styled-components",
+    "babel-plugin-import-graphql"
+  ]
+}

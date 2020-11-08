@@ -1,32 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import "./index.css"; // 渲染本网页的样式表
+import App from "./App"; // 函数式组件,是index里面最重要的内容部分
 import reportWebVitals from "./reportWebVitals";
 // above - default import
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client"; // 用来
 import { ApolloProvider } from "@apollo/client";
-import { gql } from "@apollo/client";
-// query operation
-// import { get_user } from "./api/types";
 
 export const client = new ApolloClient({
   uri: "http://localhost:23333/v1/graphql", // GraphQL server's URL
   cache: new InMemoryCache(),
 });
-
-client
-  .query({
-    query: gql`
-      query MyQuery {
-        user {
-          name
-          email
-        }
-      }
-    `,
-  })
-  .then((result) => console.log(result));
 
 ReactDOM.render(
   <ApolloProvider client={client}>

@@ -80,6 +80,7 @@
     "typecheck": "tsc --noUnusedLocals",
 
     "mystart":"react-scripts start",
+    "mystart1":"rimraf ./node_modules/.cache/babel-loader",
     "mycodegen": "yarn apollo client:codegen --target=typescript --outputFlat src/api/types.ts"
   },
   "husky": {

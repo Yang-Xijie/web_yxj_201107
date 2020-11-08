@@ -1,5 +1,6 @@
-query get_user {
+query GetUser {
   user {
     name
+    email
   }
 }

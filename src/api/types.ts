@@ -4,19 +4,20 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: get_user
+// GraphQL query operation: GetUser
 // ====================================================
 
-export interface get_user_user {
+export interface GetUser_user {
   __typename: "user";
   name: string | null;
+  email: string | null;
 }
 
-export interface get_user {
+export interface GetUser {
   /**
    * fetch data from the table: "user"
    */
-  user: get_user_user[];
+  user: GetUser_user[];
 }
 
 /* tslint:disable */
