@@ -3,10 +3,11 @@ import React from "react";
 import { useState } from "react";
 // 导入apollo中的一个hook,用来在每次渲染的时候
 import { useQuery } from "@apollo/client";
-import "antd/dist/antd.css";
+// 导入 ant design 组件和组件的样式表
 import { message, Button, Input } from "antd";
+import "antd/dist/antd.css";
 
-// 成对导入查询语句和查询的具体函数/变量类型(由codegen生成)
+// 成对导入查询语句(/src/api/*.graphql) 和 查询的变量类型(由codegen生成,src/api/types.ts)
 import { GetUserList as GET_USER_LIST } from "./api/user.graphql";
 import { GetUserList } from "./api/types";
 
@@ -16,19 +17,21 @@ import { GetUserPassword, GetUserPasswordVariables } from "./api/types";
 const App: React.FC = () => {
   document.title = `web_yxj_201107`; // 设置浏览器的标签标题
 
+  // 设置两个值,username和userpassword;这两个值在浏览器渲染的时候会保留
+  // 我的理解是,当页面中有东西改变的时候React就会重新渲染,这时相当于“初始化”,但是这些state不会初始化
   const [username, setUsername] = useState<string>();
   const [userpassword, setUserpassword] = useState<string>();
-  // const [queryPassword, setQueryPassword] = useState<string>();
 
+  // <Input />组件更改调用的回调函数
   const onNameChange = (e: any) => {
     setUsername(e.target.value); // 获取姓名输入框中的值, 存储到变量username中
   };
-
   const onPasswordChange = (e: any) => {
     setUserpassword(e.target.value); // 获取密码输入框中的值, 存储到变量userpassword中
   };
 
   // 获取所有用户的所有信息
+  // useQuery是一个hook,网页渲染就会重新加载.也就是说,每次渲染都会去后端查询一次数据
   const {
     loading: userListLoading,
     error: userListError,
@@ -44,9 +47,7 @@ const App: React.FC = () => {
     variables: { user_name: username },
   });
 
-  // 这相当于你一直在请求数据.(如果这个函数不断被调用的话)
-  // 难怪我的docker占CPU这么严重
-  // 你一改变浏览器(前端)的状态,这个函数就会被调用一次
+  // 相当于一直在请求数据.一改变浏览器(前端)的状态,这个函数就会被调用一次
   const USER_INFO = () => {
     if (userListLoading) return <p>Loading...</p>;
     if (userListError) return <p>Error...</p>;
@@ -57,18 +58,15 @@ const App: React.FC = () => {
         </p>
       </div>
     ));
-    message.success("USER_INFO render!");
+    // /* DEBUG */ message.info("USER_INFO render!");
+    // 这里在输入名字的时候会渲染两次是因为输入名字的时候useQuery也更新了
+    // 输入密码就只会渲染一次啊
     return <div>{userList}</div>;
   };
 
-  // // 函数:给进来一个用户的名字,在数据库查询这个用户的密码,返回这个用户的密码
-  // const PasswordWithUsername = (name: string) => {
-  //   return userPasswordData!.user[0].password;
-  // };
-
-  // 点击登陆发生的事情
+  // 登陆按钮的回调函数;点击登陆发生的事情
   const handleLogin = () => {
-    message.info("Button pushed!");
+    // /* DEBUG */ message.info("Button pushed!");
     // 没输入名字
     if (!username) {
       message.warning("Name null!");
@@ -80,14 +78,18 @@ const App: React.FC = () => {
       return;
     }
     // 没查到名字为username(姓名输入框的字符串)的用户,及时return防止出现undefined
+    // TODO 加了问号……但是不知道?的作用
     if (!userPasswordData?.user[0]) {
-      message.warning("No this user!");
+      message.error("No this user!");
       return;
     }
-    if (username && userpassword && userPasswordData?.user[0]) {
+    if (username && userpassword && userPasswordData.user[0]) {
       // 查询得到的密码值 === 密码输入框中的密码
-      if (userPasswordData!.user[0].password === userpassword)
+      if (userPasswordData.user[0].password === userpassword) {
         message.success("Log in successfully!");
+      } else {
+        message.error("Wrong password!");
+      }
     }
   };
 
@@ -110,12 +112,8 @@ const App: React.FC = () => {
         Log in
       </Button>
       <br />
-      username={username}
       <br />
-      userpassword={userpassword}
-      <br />
-      <br />
-      <p>show user list here</p>
+      <p>User List</p>
       <USER_INFO /> {/* 加载用户信息: 姓名+邮箱 */}
     </div>
   );

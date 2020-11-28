@@ -1,6 +1,8 @@
 # web_yxj_201107
 前端:由React和Apollo实现
+
 后端:Hasura和Postgres数据库
+
 yarn start 可以在 http://localhost:3000 看到前端
 
 # References
