@@ -1,6 +1,14 @@
-query GetUser {
+query GetUserList {
   user {
     name
     email
+    password
   }
 }
+
+query GetUserPassword ($user_name:String){
+  user(where: {name: {_eq: $user_name}}) {
+    password
+  }
+}
+
