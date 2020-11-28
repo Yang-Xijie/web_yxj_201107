@@ -1,26 +1,17 @@
 import React from "react";
+// 导入react原生的一个hook,用来在组件中保存变量,这些变量的值在渲染时不会改变
 import { useState } from "react";
+// 导入apollo中的一个hook,用来在每次渲染的时候
 import { useQuery } from "@apollo/client";
 import "antd/dist/antd.css";
 import { message, Button, Input } from "antd";
 
-// 导入查询语句
+// 成对导入查询语句和查询的具体函数/变量类型(由codegen生成)
 import { GetUserList as GET_USER_LIST } from "./api/user.graphql";
-// 导入查询的具体函数/变量(由codegen生成)
 import { GetUserList } from "./api/types";
 
 import { GetUserPassword as GET_USER_PASSWORD } from "./api/user.graphql";
 import { GetUserPassword, GetUserPasswordVariables } from "./api/types";
-
-// 1 (接口只是定义了一种参数传递和返回return的规范)
-// interface USER_INFO_Props {}
-// const USER_INFO: React.FC<USER_INFO_Props> = () => {
-
-// 2
-// const USER_INFO: React.FC = () => {
-
-// 3 (可见不声明USER_INFO是一个react函数式组件也可以,默认就是了)
-// const USER_INFO= () => {
 
 const App: React.FC = () => {
   document.title = `web_yxj_201107`; // 设置浏览器的标签标题

@@ -1,3 +1,11 @@
+# web_yxj_201107
+前端:由React和Apollo实现
+后端:Hasura和Postgres数据库
+yarn start 可以在 http://localhost:3000 看到前端
+
+# References
+[GitHub | EESAST WEB](https://github.com/eesast/web) with license [here](https://github.com/eesast/web/blob/master/LICENSE)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
